@@ -205,7 +205,7 @@ echo -e $green "64bit Selected"
 sleep 1
 ;;
 *)
-COMPILER="i686-w64-mingw32-gcc"
+COMPILER="x86_64-w64-mingw32-gcc"
 echo ""
 echo -e $green "Invalid Option , setting 32bit as default"
 sleep 1
