@@ -48,7 +48,7 @@ fi
 #ok
 2)
 echo -e "$yellow" "[ ! ]  Installing Searchsploit "
-xterm -T "☣ INSTALL SEARCHSPLOIT ☣" -geometry 100x30 -e "sudo apt-get install exploitdb --force-yes -y"
+xterm -T "☣ INSTALL SEARCHSPLOIT ☣" -geometry 100x30 -e "sudo apt-get install exploitdb -y"
 which searchsploit > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Searchsploit"
@@ -170,7 +170,7 @@ ssplt
 
 2)
 echo -e "$yellow" "[ ! ] Installing backdoor-factory "
-xterm -T "☣ INSTALL BACKDOOR-FACTORY ☣" -geometry 100x30 -e "sudo apt-get install backdoor-factory --force-yes -y"
+xterm -T "☣ INSTALL BACKDOOR-FACTORY ☣" -geometry 100x30 -e "sudo apt-get install backdoor-factory  -y"
 which backdoor-factory > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Backdoor-Factory -> OK"
@@ -261,7 +261,7 @@ bkf
 
 2)
 echo -e "$yellow" "[ ! ] Installing Metasploit-Framework  "
-xterm -T "☣ INSTALL METASPLOIT-FRAMEWORK ☣" -geometry 100x30 -e "sudo apt-get install metasploit-framework --force-yes -y"
+xterm -T "☣ INSTALL METASPLOIT-FRAMEWORK ☣" -geometry 100x30 -e "sudo apt-get install metasploit-framework  -y"
 which msfconsole > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Metasploit (msfconsole) -> OK"
@@ -502,7 +502,7 @@ fi
 sleep 1
 #installing dependencies for ruby script 
 echo -e "$green" "[ ! ] Installing tools dependencies"
-xterm -T "☣ INSTALL DEPENDENCIES ☣" -geometry 100x30 -e "sudo apt-get install zlib1g-dev libmagickwand-dev imagemagick lib32z1 lib32ncurses5 lib32stdc++6 python-pip python-dev build-essential -y && pip install names"
+xterm -T "☣ INSTALL DEPENDENCIES ☣" -geometry 100x30 -e "sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6 python-pip python-dev build-essential -y && pip install names"
 sleep 1
 
 #################################
@@ -513,42 +513,15 @@ cp /etc/apt/sources.list /etc/apt/sources.list.backup # backup
 # Second backup created in case user stops the script after this point , then on next startup this script will
 # copy the already changed sources file before as backup , and user lost his original sources lists
 file="/etc/apt/sources.list.fatrat"
-if [ -f "$file" ]
+if [ ! -f "$file" ]
 then
-echo ""
-else
 cp /etc/apt/sources.list /etc/apt/sources.list.fatrat
 fi
 rm -f /etc/apt/sources.list
 touch /etc/apt/sources.list
-#echo 'deb http://http.kali.org/kali kali-rolling main contrib non-free' >> /etc/apt/sources.list
-#echo 'deb-src http://http.kali.org/kali kali-rolling main contrib non-free' >> /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian/ jessie main contrib non-free" > /etc/apt/sources.list
-echo "deb https://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
-xterm -T "☣ UPDATING KALI REPO ☣" -geometry 100x30 -e "sudo apt-get clean && sudo apt-get clean cache && sudo apt-get update"
+xterm -T "☣ UPDATING REPOSITORIES DEDIAN JESSIE☣" -geometry 100x30 -e "sudo apt-get clean && sudo apt-get clean cache && sudo apt-get update"
 sleep 1
-
-# check if monodevelop exists
-#which monodevelop > /dev/null 2>&1
-#if [ "$?" -eq "0" ]; then
-#echo -e $green "[ ✔ ] Monodevelop ......................[ found ]"
-#which monodevelop >> "$log" 2>&1
-#echo "Monodevelop -> OK" >> "$inst"
-#else
-#echo -e $red "[ X ] Monodevelop  -> not found "
-#echo -e $yellow "[ ! ]  Installing monodevelop "
-#xterm -T "☣ INSTALL MONODEVELOP ☣" -geometry 100x30 -e "sudo apt-get install monodevelop --force-yes -y"
-#which monodevelop >> "$log" 2>&1
-#if [ "$?" -eq "0" ]; then
-#echo -e $green "[ ✔ ] Monodevelop -> OK"
-#echo "Monodevelop -> OK" >> "$inst"
-#else
-#echo -e $red "[ x ] Monodevelop"
-#echo "0" > "$stp"
-#echo "monodevelop -> Not OK" >> "$inst"
-#fi
-#fi
-#sleep 1
 
 #Checking if Jarsigner exists
 which jarsigner > /dev/null 2>&1
@@ -567,7 +540,7 @@ echo "jarsigner" | tee -a "$config" >> /dev/null 2>&1
 else
 echo -e "$red" "[ X ] Jarsigner (java) -> not found "
 echo -e "$yellow" "[ ! ] Installing Java "
-xterm -T "☣ INSTALL default-jdk ☣" -geometry 100x30 -e "sudo apt-get install default-jdk default-jre --force-yes -y "
+xterm -T "☣ INSTALL default-jdk ☣" -geometry 100x30 -e "sudo apt-get install default-jdk default-jre  -y "
 which jarsigner > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Jarsigner -> OK"
@@ -599,7 +572,7 @@ echo "Unzip -> OK" >> "$inst"
 else
 echo -e "$red" "[ X ] Unzip -> not found "
 echo -e "$yellow" "[ ! ] Installing Unzip "
-xterm -T "☣ INSTALL UNZIP ☣" -geometry 100x30 -e "sudo apt-get install unzip --force-yes -y "
+xterm -T "☣ INSTALL UNZIP ☣" -geometry 100x30 -e "sudo apt-get install unzip  -y "
 which unzip >> "$log" 2>&1
 if [ "$?" -eq "0" ]; then
 echo "unzip" | tee -a "$config" >> /dev/null 2>&1
@@ -623,7 +596,7 @@ echo "Keytool -> OK" >> "$inst"
 else
 echo -e "$red" "[ X ] Keytool (java) -> not found  "
 echo -e "$yellow" "[ ! ] Installing Java "
-xterm -T "☣ INSTALL JAVA ☣" -geometry 100x30 -e "sudo apt-get install default-jdk --force-yes -y "
+xterm -T "☣ INSTALL JAVA ☣" -geometry 100x30 -e "sudo apt-get install default-jdk  -y "
 which keytool >> "$log" 2>&1
 if [ "$?" -eq "0" ]; then
 echo "keytool" | tee -a "$config" >> /dev/null 2>&1
@@ -658,7 +631,7 @@ echo -e "$red" "[ X ] Mingw-w64 -> not found "
 #Powerstager requires mingw64 to work , mingw32 is required because powerfull.sh requires it for 32bit fud exe compiling
 # In case mingw64 not found then remove any previously mingw32 & 64 bit faulty instalations and install mingw64 
 
-xterm -T "☣ INSTALL MINGW64 COMPILLER ☣" -geometry 100x30 -e "sudo apt-get remove --purge mingw* -y && apt-get autoremove -y && apt-get install -f -y && apt-get install mingw* --force-yes -y"
+xterm -T "☣ INSTALL MINGW64 COMPILLER ☣" -geometry 100x30 -e "sudo apt-get remove --purge *mingw* -y && apt-get autoremove -y && apt-get install *mingw* -y"
 which x86_64-w64-mingw32-gcc > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Mingw-64 Compiler..................[ found ]"
@@ -683,7 +656,7 @@ echo -e "$red" "[ X ] Mingw-32 -> not found "
 #Powerstager requires mingw64 to work , mingw32 is required because powerfull.sh requires it for 32bit fud exe compiling
 # In case mingw64 not found then remove any previously mingw32 & 64 bit faulty instalations and install mingw64 
 
-xterm -T "☣ INSTALL MINGW32 COMPILLER ☣" -geometry 100x30 -e "sudo apt-get remove --purge mingw* -y && apt-get autoremove -y && apt-get install -f -y && apt-get install mingw* --force-yes -y"
+xterm -T "☣ INSTALL MINGW32 COMPILLER ☣" -geometry 100x30 -e "sudo apt-get remove --purge *mingw* -y && apt-get autoremove -y && apt-get install *mingw* -y"
 which i686-w64-mingw32-gcc > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 echo -e "$green" "[ ✔ ] Mingw-32 Compiler..................[ found ]"
@@ -699,7 +672,7 @@ sleep 1
 which dx > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 dxg=$(dx --version 2>&1 | tee temp/dx)
-dxv=$(cat temp/dx | awk '{print $3}') 
+dxv=$(grep "version" < temp/dx | awk '{print $3}') 
 case "$dxv" in
 1.12)
 #DX exists and it is version 1.12
@@ -710,7 +683,7 @@ echo -e "$green" "[ ✔ ] DX 1.12...........................[ found ]"
 echo "DX -> OK" >> "$inst"
 ;;
 *)
-#DX does not exists or is not 1.8 version
+#DX does not exists or is not 1.12 version
 xterm -T "☣ Removing Your Current DX ☣" -geometry 100x30 -e "sudo apt-get remove --purge dx -y"
 unlink "/usr/local/sbin/dx" > /dev/null 2>&1
 ln -s "$path/tools/android-sdk/dx" "/usr/local/sbin/dx" > /dev/null 2>&1
@@ -796,24 +769,24 @@ which apktool > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 apk=`apktool | sed -n 1p | awk '{print $2}'` > /dev/null 2>&1
 case "$apk" in 
-v.2.4.0)
+v.2.4.1)
 which apktool >> "$log" 2>&1
 echo "apktool" | tee -a "$config" >> /dev/null 2>&1
-echo -e "$green" "[ ✔ ] Apktool v.2.4.0..................[ found ]"
+echo -e "$green" "[ ✔ ] Apktool v.2.4.1..................[ found ]"
 echo "Apktool -> OK" >> "$inst"
 ;;
 *)
 xterm -T "☣ REMOVE OLD APKTOOL ☣" -geometry 100x30 -e "sudo apt-get remove --purge apktool -y"
 unlink "/usr/local/sbin/apktool" > /dev/null 2>&1
-ln -s "$path/tools/apktool2.4.0/apktool" "/usr/local/sbin/apktool" > /dev/null 2>&1
+ln -s "$path/tools/apktool2.4.1/apktool" "/usr/local/sbin/apktool" > /dev/null 2>&1
 which apktool > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
-echo -e "$green" "[ ✔ ] Apktool v.2.4.0..................[Installed]"
+echo -e "$green" "[ ✔ ] Apktool v.2.4.1..................[Installed]"
 which apktool >> "$log" 2>&1
 echo "apktool" | tee -a "$config" >> /dev/null 2>&1
 echo "Apktool -> OK" >> "$inst"
 else
-echo -e "$red" "[ x ] Apktool v.2.4.0"
+echo -e "$red" "[ x ] Apktool v.2.4.1"
 echo "0" > "$stp"
 echo "apktool -> Not OK" >> "$inst"
 fi
@@ -821,15 +794,15 @@ fi
 esac
 else
 unlink "/usr/local/sbin/apktool" > /dev/null 2>&1
-ln -s "$path/tools/apktool2.4.0/apktool" "/usr/local/sbin/apktool" > /dev/null 2>&1
+ln -s "$path/tools/apktool2.4.1/apktool" "/usr/local/sbin/apktool" > /dev/null 2>&1
 which apktool > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 which apktool >> "$log" 2>&1
 echo "apktool" | tee -a "$config" >> /dev/null 2>&1
-echo -e "$green" "[ ✔ ] Apktool v.2.4.0..................[Installed]"
+echo -e "$green" "[ ✔ ] Apktool v.2.4.1..................[Installed]"
 echo "Apktool -> OK" >> "$inst"
 else
-echo -e "$red" "[ x ] Apktool v.2.4.0"
+echo -e "$red" "[ x ] Apktool v.2.4.1"
 echo "0" > "$stp"
 echo "apktool -> Not OK" >> "$inst"
 fi
@@ -839,7 +812,7 @@ sleep 1
 # Installing baksmali 2.3.3 
 which baksmali > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
-bsvs=$(baksmali --version | sed -n 1p | awk '{print$2}')
+bsvs=$(baksmali --version | grep "baksmali" | awk '{print$2}')
 case "$bsvs" in
 2.3.3)
 which baksmali >> "$log" 2>&1
@@ -879,8 +852,12 @@ echo "0" > "$stp"
 echo "baksmali -> Not OK" >> "$inst"
 fi
 fi
+rm -f /etc/apt/sources.list
+touch /etc/apt/sources.list
+echo "deb https://http.kali.org/kali kali-rolling main non-free contrib" > /etc/apt/sources.list
+xterm -T "☣ UPDATING KALI REPOSITORIES ☣" -geometry 100x30 -e "sudo apt-get clean && sudo apt-get clean cache && sudo apt-get update"
+sleep 1
 mtspl
-
 ################################
 # rebackyo repo
 ################################
@@ -912,15 +889,6 @@ cp "$path/config/TheFatRat.desktop" /usr/share/applications/TheFatRat.desktop
 cp "$path/icons/TheFatRat.ico" /usr/share/icons/TheFatRat.ico
 chmod +x /usr/local/sbin/fatrat
 chmod +x fatrat
-chmod +x powerfull.sh
-chmod +x update
-chmod +x backdoor_apk
-chmod +x $path/tools/power.py
-chmod +x $path/tools/android-sdk/zipalign
-chmod +x $path/tools/baksmali233/baksmali
-chmod +x $path/tools/android-sdk/dx
-chmod +x $path/tools/android-sdk/aapt
-chmod +x $path/tools/apktool2.4.0/apktool
 which fatrat >> "$log" 2>&1
 clear
 echo ""
@@ -930,15 +898,6 @@ fi
 
 n|no|No|NO)
 chmod +x fatrat
-chmod +x powerfull.sh
-chmod +x update
-chmod +x backdoor_apk
-chmod +x $path/tools/power.py
-chmod +x $path/tools/android-sdk/zipalign
-chmod +x $path/tools/baksmali233/baksmali
-chmod +x $path/tools/android-sdk/dx
-chmod +x $path/tools/android-sdk/aapt
-chmod +x $path/tools/apktool2.4.0/apktool
 clear
 echo ""
 echo -e "$green" "Instalation completed , To execute fatrat write in fatrat directory (./fatrat)"
@@ -946,15 +905,6 @@ echo -e "$green" "Instalation completed , To execute fatrat write in fatrat dire
 
 *)
 chmod +x fatrat
-chmod +x powerfull.sh
-chmod +x update
-chmod +x backdoor_apk
-chmod +x $path/tools/power.py
-chmod +x $path/tools/android-sdk/zipalign
-chmod +x $path/tools/baksmali233/baksmali
-chmod +x $path/tools/android-sdk/dx
-chmod +x $path/tools/android-sdk/aapt
-chmod +x $path/tools/apktool2.4.0/apktool
 clear
 echo ""
 echo -e "$green" "Instalation completed , To execute fatrat write in fatrat directory (./fatrat)"
@@ -1176,6 +1126,22 @@ echo -ne "$green""Checking necessary packages with your current repositories ...
 chkpkg
 echo ""
 sleep 2
+echo -ne "$green""* - Checking file permissions ..."
+chmod +x powerfull.sh
+chmod +x update
+chmod +x backdoor_apk
+chmod +x tools/power.py
+chmod +x tools/android-sdk/zipalign
+chmod +x tools/baksmali233/baksmali
+chmod +x tools/android-sdk/dx
+chmod +x tools/android-sdk/aapt
+chmod +x tools/apktool2.4.1/apktool
+chmod +x tools/android-string-obfuscator/lib/aso
+chmod +x tools/pump.py
+chmod +x tools/pw_exec.py
+chmod +x tools/trusted_2_6.py
+echo "Done"
+sleep 0.5
 clear
 #Banner dong biar keren
 echo -e "$green" ""
